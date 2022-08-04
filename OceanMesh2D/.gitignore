@@ -1,0 +1,11 @@
+m_map/
+datasets/
+fort.*
+Examples/*
+!Examples/Example_*
+*/*.mat
+*.15
+*.14
+*.13
+*.24
+*.nc
