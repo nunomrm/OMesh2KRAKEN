@@ -71,17 +71,13 @@ and comes from https://doi.org/10.48670/moi-00027
 #######################################################################################
 
 References:
-[1] The Acoustics Toolbox. Last accessed July 8, 2022: 
-http://oalib.hlsresearch.com/AcousticsToolbox/.
-[2] Pawlowicz, R., 2020. "M_Map: A mapping package for MATLAB", version 1.4m,
-[Computer software], available online at www.eoas.ubc.ca/~rich/map.html.
-[3] Roberts, K. J., Pringle, W. J., and Westerink, J. J., 2019. 
-OceanMesh2D 1.0: MATLAB-based software for two-dimensional unstructured mesh generation
-in coastal ocean modeling, Geoscientific Model Development, 12, 1847-1868. 
-https://doi.org/10.5194/gmd-12-1847-2019.
-[4] Stephen23 (2022). ColorBrewer: Attractive and Distinctive 
-Colormaps (https://github.com/DrosteEffect/BrewerMap/releases/tag/3.2.3), GitHub. 
-Retrieved July 8, 2022.
-[5] Sergei Koptenko (2022). Sound Speed in Sea Water 
-(https://www.mathworks.com/matlabcentral/fileexchange/4940-sound-speed-in-sea-water), 
-MATLAB Central File Exchange. Retrieved July 8, 2022.
+
+[1] The Acoustics Toolbox. Last accessed July 8, 2022: http://oalib.hlsresearch.com/AcousticsToolbox/.
+
+[2] Pawlowicz, R., 2020. "M_Map: A mapping package for MATLAB", version 1.4m, [Computer software], available online at www.eoas.ubc.ca/~rich/map.html.
+
+[3] Roberts, K. J., Pringle, W. J., and Westerink, J. J., 2019. OceanMesh2D 1.0: MATLAB-based software for two-dimensional unstructured mesh generation in coastal ocean modeling, Geoscientific Model Development, 12, 1847-1868. https://doi.org/10.5194/gmd-12-1847-2019.
+
+[4] Stephen23 (2022). ColorBrewer: Attractive and Distinctive Colormaps (https://github.com/DrosteEffect/BrewerMap/releases/tag/3.2.3), GitHub. Retrieved July 8, 2022.
+
+[5] Sergei Koptenko (2022). Sound Speed in Sea Water (https://www.mathworks.com/matlabcentral/fileexchange/4940-sound-speed-in-sea-water), MATLAB Central File Exchange. Retrieved July 8, 2022.
