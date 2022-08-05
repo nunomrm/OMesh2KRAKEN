@@ -6,8 +6,8 @@ modeling with KRAKEN
 
 OMesh2KRAKEN is distributed under the GNU Public License.
 
-v.0.0 July 2022 * OMesh2Kraken is under development at the University of Aveiro by
- Nuno Monteiro and Tiago Oliveira.
+v.0.0 August 2022 * OMesh2Kraken is under development by Nuno Monteiro (nunom@ua.pt) 
+and Tiago Oliveira (toliveira@ua.pt) at the University of Aveiro.
 
 #######################################################################################
 #######################################################################################
