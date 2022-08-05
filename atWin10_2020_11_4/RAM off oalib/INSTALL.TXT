@@ -1,0 +1,29 @@
+
+This directory (AT/RAM if installed correctly) contains the most recent
+version of the RAM PE (Parabolic Equation) acoustic propagation model
+written by Michael Collins of NRL, with some minor modifications by HLS.
+A short summary of the modifications can be found in the file named
+"diffs_re_nrl.txt". The original, unmodified code was obtained from
+the NRL ftp server at;
+
+	ftp://ftp.ccs.nrl.navy.mil/pub/ram/RAM/
+
+Because RAM is not an integral part of the HLS Acoustics Toolbox,
+building it is a separate task. There is a single FORTRAN source file
+named "ram.f" that needs to be compiled to produce an executable file
+"ram.exe" which should then be copied into the ../bin directory. This
+can be done manually as shown below or if you have a make utility
+by using the provided Makefile
+
+	gfortran -o ram.exe -Os ram.f
+
+	copy ram.exe ..\bin
+
+If you use the provided Makefile, it will likely require customization 
+to reflect which FORTRAN compiler you have. Edit the Makefile, and
+modify the assignment to FC to reflect your FORTRAN compiler (the full
+path to the compiler may be required depending on how it was installed).
+The FFLAGS variable may also need to be modified to specify the compiler
+flags for the desired level of optimization which is compiler dependent
+in general. For g77 or gfortran, either -Os or -O2 work well.
+

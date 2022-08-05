@@ -1,0 +1,18 @@
+
+
+********************************************************
+***** Range-dependent Acoustic Model, Version 0.0s *****
+********************************************************
+
+
+31 July 1996
+
+A prototype of rams is now available. This code is a version
+of ram that treats the ocean bottom as an elastic medium. The
+code is a prototype because there are some improvements for
+range-dependent problems that have not yet been implemented. 
+The code should be very useful in its present form. However,
+errors of a few decibels may occur for some shallow water cases
+involving sloping bottoms.
+
+

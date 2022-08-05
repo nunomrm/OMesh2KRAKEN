@@ -1,0 +1,61 @@
+--- /tmp/RAM_NRL/ram1.5.f	2000-09-13 00:00:00.000000000 -0700
++++ ram.f	2011-10-19 17:11:34.000000000 -0700
+@@ -3,6 +3,8 @@
+ c     ******************************************************************
+ c     ***** Range-dependent Acoustic Model, Version 1.5, 13-Sep-00 *****
+ c     ******************************************************************
++c
++c     $Id: $
+ c     
+ c     This code was developed by Michael D. Collins at the Naval
+ c     Research Laboratory in Washington, DC. It solves range-dependent 
+@@ -48,7 +50,7 @@
+ c
+ c     mr=bathymetry points, mz=depth grid, mp=pade terms.
+ c
+-      parameter (mr=100,mz=8000,mp=10)
++      parameter (mr=5000,mz=100000,mp=16)
+       dimension rb(mr),zb(mr),cw(mz),cb(mz),rhob(mz),attn(mz),alpw(mz),
+      >   alpb(mz),f1(mz),f2(mz),f3(mz),ksq(mz),ksqw(mz),ksqb(mz),u(mz),
+      >   v(mz),tlg(mz),r1(mz,mp),r2(mz,mp),r3(mz,mp),s1(mz,mp),
+@@ -118,7 +120,8 @@
+       dir=ri-float(ir)
+       k0=omega/c0
+       nz=zmax/dz-0.5
+-      nzplt=zmplt/dz-0.5
++c     last depth in tl.grid was NOT being output (jcp)
++      nzplt=zmplt/dz
+       z=zb(1)
+       iz=1.0+z/dz
+       iz=max(2,iz)
+@@ -150,7 +153,10 @@
+       do 5 i=ndz,nzplt,ndz
+       lz=lz+1
+     5 continue
+-      write(3)lz
++c     write(3)lz
++c     header containing a more detailed description of the problem (jcp)
++      write(3) freq,zs,zr,rmax,dr,ndr,zmax,dz,ndz,zmplt,c0,np,ns,rs,lz
++
+ c
+ c     The initial profiles and starting field.
+ c
+@@ -460,14 +466,14 @@
+       complex ur,u(mz)
+       real f3(mz),tlg(mz)
+ c
+-      ur=(1.0-dir)*f3(ir)*u(ir)+dir*f3(ir+1)*u(ir+1)
+-      tl=-20.0*alog10(cabs(ur)+eps)+10.0*alog10(r+eps)
+-      write(2,*)r,tl
+-c
+       mdr=mdr+1
+       if(mdr.eq.ndr)then
+       mdr=0
+ c
++      ur=(1.0-dir)*f3(ir)*u(ir)+dir*f3(ir+1)*u(ir+1)
++      tl=-20.0*alog10(cabs(ur)+eps)+10.0*alog10(r+eps)
++      write(2,*)r,tl
++c
+       j=0
+       do 1 i=ndz,nzplt,ndz
+       ur=u(i)*f3(i)
