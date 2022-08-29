@@ -1,4 +1,4 @@
-#OMesh2KRAKEN: A tool for mesh generation with OceanMesh2D for underwater acoustic 
+# OMesh2KRAKEN: A tool for mesh generation with OceanMesh2D for underwater acoustic 
 modeling with KRAKEN
 
 
