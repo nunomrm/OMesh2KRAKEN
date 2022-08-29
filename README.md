@@ -4,15 +4,13 @@ version 0.1 August 2022
 
 OMesh2Kraken is under development by Nuno Monteiro (nunom@ua.pt) and Tiago Oliveira (toliveira@ua.pt) at the University of Aveiro. OMesh2KRAKEN is distributed under the GNU Public License.
 
-Dependencies:
+## Dependencies
  * MATLAB (only the R2021b version was tested)
  * OceanMesh2D v4.0
  * Acoustic's Toolbox (2020_11_4 version)
  * m_map package
 
-#######################################################################################
-
-General description of directories:
+## General description of directories
  * atWin10_2020_11_4: Contains the Acoustics Toolbox (Windows version at [1]). The 
 original "tests" folder from the Acoustics Toolbox was removed to save space;
  * data: Contains environmental data (temperature and salinity), bathymetry and 
@@ -28,8 +26,6 @@ sound speed, make bathymetry field plots), where functions "brewermap.m" and "sn
 come from [4] and [5], respectively, while remaining ("find_nearest_point.m, plot_mesh_
 bathy.m" and "plot2D_TL_slice.m") are custom made for OMesh2Kraken.
 
-#######################################################################################
-
 Test step-by-step instructions (Tagus estuary study case):
  * Tagus estuary study case
     1) Go to the tests/tagus_estuary folder from the main directory and execute 
@@ -40,9 +36,7 @@ are run);
 This worflow is similar for the Azores study case (except that in the second step only
 KRAKEN is runned).
 
-#######################################################################################
-
-Data description:
+## Data description:
  * "data/bathymetry/EMODNET_DTM_*.nc": bathymetry data that was extracted from the 
 EMODNET DTM database (after extraction, those two datasets were cropped for the Azores 
 and Tagus estuary regions), that can be accessed at http://www.emodnet-bathymetry.eu
@@ -60,16 +54,10 @@ system (https://doi.org/10.48670/moi-00016)
 the Tagus Estuary region with a 7-day span (and daily frequency) during September 2020 
 and comes from https://doi.org/10.48670/moi-00027
 
-#######################################################################################
-
-References:
+## References
 
 [1] The Acoustics Toolbox. Last accessed July 8, 2022: http://oalib.hlsresearch.com/AcousticsToolbox/.
-
 [2] Pawlowicz, R., 2020. "M_Map: A mapping package for MATLAB", version 1.4m, [Computer software], available online at www.eoas.ubc.ca/~rich/map.html.
-
 [3] Roberts, K. J., Pringle, W. J., and Westerink, J. J., 2019. OceanMesh2D 1.0: MATLAB-based software for two-dimensional unstructured mesh generation in coastal ocean modeling, Geoscientific Model Development, 12, 1847-1868. https://doi.org/10.5194/gmd-12-1847-2019.
-
 [4] Stephen23 (2022). ColorBrewer: Attractive and Distinctive Colormaps (https://github.com/DrosteEffect/BrewerMap/releases/tag/3.2.3), GitHub. Retrieved July 8, 2022.
-
 [5] Sergei Koptenko (2022). Sound Speed in Sea Water (https://www.mathworks.com/matlabcentral/fileexchange/4940-sound-speed-in-sea-water), MATLAB Central File Exchange. Retrieved July 8, 2022.
