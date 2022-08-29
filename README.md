@@ -36,20 +36,21 @@ are run);
 This worflow is similar for the Azores study case (except that in the second step only
 KRAKEN is runned).
 
-## Data description:
- * "data/bathymetry/EMODNET_DTM_*.nc": bathymetry data that was extracted from the 
+## Data description
+ * ```bathymetry/EMODNET_DTM_*.nc```: bathymetry data that was extracted from the 
 EMODNET DTM database (after extraction, those two datasets were cropped for the Azores 
 and Tagus estuary regions), that can be accessed at http://www.emodnet-bathymetry.eu
- * "data/shorelines/GSHHS_h_L1*": GSHHG shoreline data for obtained from 
+ * ```data/bathymetry```
+ * ```data/shorelines/GSHHS_h_L1*```: GSHHG shoreline data for obtained from 
 https://www.soest.hawaii.edu/pwessel/gshhg/
- * "data/shorelines/CNTR_RG_01M_2020_4326*": shoreline dataset from the GISCO database
+ * ```data/shorelines/CNTR_RG_01M_2020_4326*```: shoreline dataset from the GISCO database
 (https://ec.europa.eu/eurostat/web/gisco/overview), for the Tagus estuary study case
- * "data/temperature_salinity/cmems_mod_ibi_phy_anfc_0.027deg-3D_P1D-m_1647891936780
-.nc": dataset of monthly mean data of 2021 of ocean's temperature and salinity 3D data 
+ * ```data/temperature_salinity/cmems_mod_ibi_phy_anfc_0.027deg-3D_P1D-m_1647891936780
+.nc```: dataset of monthly mean data of 2021 of ocean's temperature and salinity 3D data 
 in the Azores region from the Operational Mercator global ocean analysis and forecast 
 system (https://doi.org/10.48670/moi-00016)
- * "data/temperature_salinity/global-analysis-forecast-phy-001-024-monthly_16560154763
-92.nc": daily 3D temperature and salinity data from the from the operational IBI 
+ * ```data/temperature_salinity/global-analysis-forecast-phy-001-024-monthly_16560154763
+92.nc```: daily 3D temperature and salinity data from the from the operational IBI 
 (Iberian Biscay Irish) Ocean Analysis and Forecasting system; data was extracted for 
 the Tagus Estuary region with a 7-day span (and daily frequency) during September 2020 
 and comes from https://doi.org/10.48670/moi-00027
@@ -57,7 +58,11 @@ and comes from https://doi.org/10.48670/moi-00027
 ## References
 
 [1] The Acoustics Toolbox. Last accessed July 8, 2022: http://oalib.hlsresearch.com/AcousticsToolbox/.
+
 [2] Pawlowicz, R., 2020. "M_Map: A mapping package for MATLAB", version 1.4m, [Computer software], available online at www.eoas.ubc.ca/~rich/map.html.
+
 [3] Roberts, K. J., Pringle, W. J., and Westerink, J. J., 2019. OceanMesh2D 1.0: MATLAB-based software for two-dimensional unstructured mesh generation in coastal ocean modeling, Geoscientific Model Development, 12, 1847-1868. https://doi.org/10.5194/gmd-12-1847-2019.
+
 [4] Stephen23 (2022). ColorBrewer: Attractive and Distinctive Colormaps (https://github.com/DrosteEffect/BrewerMap/releases/tag/3.2.3), GitHub. Retrieved July 8, 2022.
+
 [5] Sergei Koptenko (2022). Sound Speed in Sea Water (https://www.mathworks.com/matlabcentral/fileexchange/4940-sound-speed-in-sea-water), MATLAB Central File Exchange. Retrieved July 8, 2022.
