@@ -11,20 +11,13 @@ OMesh2Kraken is under development by Nuno Monteiro (nunom@ua.pt) and Tiago Olive
  * m_map package
 
 ## General description of directories
- * atWin10_2020_11_4: Contains the Acoustics Toolbox (Windows version at [1]). The 
-original "tests" folder from the Acoustics Toolbox was removed to save space;
- * data: Contains environmental data (temperature and salinity), bathymetry and 
-shoreline datasets to run the two tests;
+ * atWin10_2020_11_4: Contains the Acoustics Toolbox (Windows version at [1]). The original "tests" folder from the Acoustics Toolbox was removed to save space;
+ * data: Contains environmental data (temperature and salinity), bathymetry and shoreline datasets to run the two tests;
  * m_map: A mapping package for Matlab (dependency for OceanMesh2D) [2];
- * OceanMesh2D: OceanMesh2D toolbox [3] adapted to OMesh2Kraken. Changes were 
-made to msh.m in OceanMesh2d/@msh/, and a script writekraken3d.m to save input files
+ * OceanMesh2D: OceanMesh2D toolbox [3] adapted to OMesh2Kraken. Changes were made to msh.m in OceanMesh2d/@msh/, and a script writekraken3d.m to save input files
 for KRAKEN3D was created in OceanMesh2D/@msh/private;
- * tests: Tagus Estuary and Azores study cases shown in Sections 3.1 and 3.2 of the
-paper, respectivelly, to test OMesh2KRAKEN;
- * utils: Contains functions for pre/post-processing purposes (e.g., to calculate the 
-sound speed, make bathymetry field plots), where functions "brewermap.m" and "sndspd.m"
-come from [4] and [5], respectively, while remaining ("find_nearest_point.m, plot_mesh_
-bathy.m" and "plot2D_TL_slice.m") are custom made for OMesh2Kraken.
+ * tests: Tagus Estuary and Azores study cases shown in Sections 3.1 and 3.2 of the paper, respectivelly, to test OMesh2KRAKEN;
+ * utils: Contains functions for pre/post-processing purposes (e.g., to calculate the sound speed, make bathymetry field plots), where functions "brewermap.m" and "sndspd.m" come from [4] and [5], respectively, while remaining ("find_nearest_point.m, plot_mesh_bathy.m" and "plot2D_TL_slice.m") are custom made for OMesh2Kraken.
 
 ## How to use OMesh2KRAKEN
 Here we present hands-on instructions to reproduce the Tagus estuary study case results:
@@ -35,23 +28,12 @@ Here we present hands-on instructions to reproduce the Tagus estuary study case 
 This worflow is similar for the Azores study case (```tests/azores/```), except that only ```KRAKEN``` is necessary to execute.
 
 ## Data description
- * ```bathymetry/EMODNET_DTM_*.nc```: bathymetry data that was extracted from the 
-EMODNET DTM database (after extraction, those two datasets were cropped for the Azores 
-and Tagus estuary regions), that can be accessed at http://www.emodnet-bathymetry.eu
- * ```data/bathymetry```
- * ```data/shorelines/GSHHS_h_L1*```: GSHHG shoreline data for obtained from 
-https://www.soest.hawaii.edu/pwessel/gshhg/
- * ```data/shorelines/CNTR_RG_01M_2020_4326*```: shoreline dataset from the GISCO database
-(https://ec.europa.eu/eurostat/web/gisco/overview), for the Tagus estuary study case
- * ```data/temperature_salinity/cmems_mod_ibi_phy_anfc_0.027deg-3D_P1D-m_1647891936780
-.nc```: dataset of monthly mean data of 2021 of ocean's temperature and salinity 3D data 
-in the Azores region from the Operational Mercator global ocean analysis and forecast 
-system (https://doi.org/10.48670/moi-00016)
- * ```data/temperature_salinity/global-analysis-forecast-phy-001-024-monthly_16560154763
-92.nc```: daily 3D temperature and salinity data from the from the operational IBI 
-(Iberian Biscay Irish) Ocean Analysis and Forecasting system; data was extracted for 
-the Tagus Estuary region with a 7-day span (and daily frequency) during September 2020 
-and comes from https://doi.org/10.48670/moi-00027
+ * ```bathymetry/EMODNET_DTM_*.nc```: bathymetry data from the EMODNET DTM database (after extraction, those two datasets were cropped for the Azores and Tagus estuary regions), that can be accessed at http://www.emodnet-bathymetry.eu;
+ * ```data/bathymetry/```: bathymetry data from the GEBCO 2020 global grid dataset (https://www.gebco.net/data\_and_products/gridded\_bathymetry\_data/gebco\_2020/), used only for the Azores study case;
+ * ```data/shorelines/GSHHS_h_L1*```: GSHHG shoreline data for obtained from https://www.soest.hawaii.edu/pwessel/gshhg/;
+ * ```data/shorelines/CNTR_RG_01M_2020_4326*```: shoreline dataset from the GISCO database (https://ec.europa.eu/eurostat/web/gisco/overview), for the Tagus estuary study case;
+ * ```data/temperature_salinity/cmems_mod_ibi_phy_anfc_0.027deg-3D_P1D-m_1647891936780.nc```: dataset of monthly mean data of 2021 of ocean's temperature and salinity 3D data in the Azores region from the Operational Mercator global ocean analysis and forecast system (https://doi.org/10.48670/moi-00016);
+ * ```data/temperature_salinity/global-analysis-forecast-phy-001-024-monthly_1656015476392.nc```: 7-day span daily mean temperature and salinity data provided by the operational IBI (Iberian Biscay Irish) Ocean Analysis and Forecasting system data which was extracted for the Tagus Estuary region (https://doi.org/10.48670/moi-00027).
 
 ## References
 
