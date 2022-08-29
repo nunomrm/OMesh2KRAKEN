@@ -26,15 +26,13 @@ sound speed, make bathymetry field plots), where functions "brewermap.m" and "sn
 come from [4] and [5], respectively, while remaining ("find_nearest_point.m, plot_mesh_
 bathy.m" and "plot2D_TL_slice.m") are custom made for OMesh2Kraken.
 
-Test step-by-step instructions (Tagus estuary study case):
- * Tagus estuary study case
-    1) Go to the tests/tagus_estuary folder from the main directory and execute 
-  "Run_OM2D_Tagus_Estuary.m";
-    2) In the same directory, execute Run_KRAKEN3D_Tagus_Estuary.m (KRAKEN and FIELD3D
-are run);
-    3) Run Plotting_Tagus_Estuary.m 
-This worflow is similar for the Azores study case (except that in the second step only
-KRAKEN is runned).
+## How to use OMesh2KRAKEN
+Here we present hands-on instructions to reproduce the Tagus estuary study case results:
+    1) Go to the ```tests/tagus_estuary/``` folder from the main directory and execute ```Run_OM2D_Tagus_Estuary.m```;
+    2) In the same directory, execute ```Run_KRAKEN3D_Tagus_Estuary.m``` (```KRAKEN``` and ```FIELD3D``` are run);
+    3) Run ```Plotting_Tagus_Estuary.m```
+    
+This worflow is similar for the Azores study case (```tests/azores/```), except that only ```KRAKEN``` is necessary to execute.
 
 ## Data description
  * ```bathymetry/EMODNET_DTM_*.nc```: bathymetry data that was extracted from the 
