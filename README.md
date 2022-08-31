@@ -1,8 +1,10 @@
-# OMesh2KRAKEN: A tool for mesh generation with OceanMesh2D for underwater acoustic modeling with KRAKEN
+# OMesh2KRAKEN
 
-version 0.1 August 2022
+OMesh2KRAKEN: A tool for mesh generation with OceanMesh2D for underwater acoustic modeling with KRAKEN
 
-OMesh2Kraken is under development by Nuno Monteiro (nunom@ua.pt) and Tiago Oliveira (toliveira@ua.pt) at the University of Aveiro. OMesh2KRAKEN is distributed under the GNU Public License.
+version 1.0 September 2022
+
+OMesh2Kraken is under development by Nuno Monteiro (nunom@ua.pt) and Tiago Oliveira (toliveira@ua.pt). OMesh2KRAKEN is distributed under the GNU Public License.
 
 ## Dependencies
  * MATLAB (only the R2021b version was tested)
