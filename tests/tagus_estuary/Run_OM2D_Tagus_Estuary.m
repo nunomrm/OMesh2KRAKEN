@@ -24,7 +24,7 @@ grade_all=[0.32 0.27];                                                  % mesh g
 dems=["EMODNET_DTM_SouthLisbon.nc"; "EMODNET_DTM_SouthLisbon.nc"];      % digital elevation model filenames, defining the input bathymetry
 coastlines=["CNTR_RG_01M_2020_4326"; "CNTR_RG_01M_2020_4326"];          % coastline filenames
 alpha_all = [0 25];                                                     % alpha parameter to solve the slope mesh size function
-fname='tagus_estuary';                                                  % filename of output mesh file (FLP) and prefix name of ENV files
+                                             % filename of output mesh file (FLP) and prefix name of ENV files
 coord_source=[-9.317, 38.665];                                          % sound source coords in lat/lon
 
 %%%%% 1.2 Inputs for KRAKEN %%%%%%%%%%
@@ -45,6 +45,7 @@ C_low = 1400;                       % min phase sound speed (m/s)
 C_high = 15000;                     % max phase sound speed (m/s)
 deltassp = 1;                       % increment of the SSP depths
 sndspd_bot = 1700;                  % soundspeed at bottom layer
+fname_env='tagus_estuary'; 
 
 %%%%% 1.3 Inputs for FIELD3D %%%%%%%%%%
 
@@ -53,7 +54,7 @@ calc_flp = "STD";                           % type of calculation
 Nm = 999;                                   % number of modes
 Nsx = 1;                                    % number of source coords in x
 Nsy = 1;                                    % number of source coords in y
-coords_or_km = [0 0];                       % coords of the origin (km)
+coord_or_km = [0 0];                       % coords of the origin (km)
 NSz = 1;                                    % number of source depths
 Sz = 10;                                    % source depths (m)
 Rzmin = 0;                                  % min receiver depth (m)
@@ -79,6 +80,7 @@ NGBtheta = length(thetaGB);                 % number of Gaussian beam radials
 GBstep = 1;                                 % step size of Gaussian beams (m)
 GBsteps = 1000;                             % number of Gaussian beam steps
 epsilon_mult = 0.3;                         % epsilon multiplier for Gaussian beam initial conditions
+fname_flp='tagus_estuary'; 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% end of Input options %%%%%%%%%%%%
@@ -93,7 +95,7 @@ params_env = {freq NMedia top_opt sigma_int1 sigma_int2 N_layer1 N_layer2 ...
     Rdepth Sdepth sigma_bot C_low C_high deltassp sndspd_bot};
 
 % Cell array containing parameters for the FLP file provided by user in 1.3
-params_flp={title_flp calc_flp Nm Nsx coords_or_km(1) Nsy coords_or_km(2) NSz Sz ...
+params_flp={title_flp calc_flp Nm Nsx coord_or_km(1) Nsy coord_or_km(2) NSz Sz ...
     NRz Rzmin Rzmax NRr Rrmin Rrmax NRtheta Rthetamin Rthetamax NGBtheta ...
     GBthetamin GBthetamax GBstep GBsteps epsilon_mult};
 
@@ -157,7 +159,7 @@ z=m.b;
 
 % define Lat/Lon coords of origin the new referential in km for KRAKEN
 [lo,la,idx] = find_nearest_point(lon, lat, coord_source(1), coord_source(2)); % source coordinates and index in the mesh
-coords_or = [lo la]; % coords of source (in degrees), which will be the origin of the referential in km coords
+coord_or = [lo la]; % coords of source (in degrees), which will be the origin of the referential in km coords
 
 % other corrections to the bathymetry
 z(isnan(z))=0;  % convert nan nodes into zeros
@@ -168,31 +170,44 @@ m.b=z;          % apply correction to mesh
 %%%%%%%% end of Run OceanMesh2D %%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% 4 - Write mesh data %%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-write(m,fname,'kraken3d','nob',1,'fname_env',fname,'TS_data',TS_data, ...
-    'params_env',params_env, 'coords_or',coords_or,'params_flp',params_flp);
+flag_env=1;
+flag_flp=1;
 
-if ~exist('io_files_kraken','dir')
-    mkdir('io_files_kraken')                        % create a directory for input/output files of kraken if it doesnt exist
+% Struct array with all ENV inputs
+inp_env.flag = flag_env;
+inp_env.params = params_env;
+inp_env.TS_data = TS_data;
+% Struct array with all FLP inputs
+inp_flp.coord_or = coord_or;
+inp_flp.flag = flag_flp;
+inp_flp.params = params_flp;
+fnames = {fname_env fname_flp};
+
+write(m,fnames,'kraken3d','nob',1,'inp_env',inp_env,'inp_flp',inp_flp);
+
+if ~exist('data_kraken','dir')
+    mkdir('data_kraken')                        % create a directory for input/output files of kraken if it doesnt exist
 else
-    delete('io_files_kraken\*')                     % remove everything from the input/ouput kraken directory
+    delete('data_kraken\*')                     % remove everything from the input/ouput kraken directory
 end
 
-movefile('*.env','io_files_kraken\')                % move all envs to the input/ouput kraken directory
+movefile('*.env','data_kraken\')                % move all envs to the input/ouput kraken directory
 
 if ~exist('plots\','dir')
     mkdir('plots\')                                 % create a directory for plotting if it doesnt exist
 end
 
-grid_info.z=z;
-grid_info.lon=lon;
-grid_info.lat=lat;
-grid_info.tri=tri;
-grid_info.pfix=coords_or;
-save('grid_info.mat','-struct','grid_info');    % save a MATLAB struct with mesh info (to be used in Plotting_Tagus_Estuary.m)
+mesh_data.z=z;
+mesh_data.lon=lon;
+mesh_data.lat=lat;
+mesh_data.tri=tri;
+mesh_data.pfix=coord_or;
+save('mesh_data.mat','-struct','mesh_data');    % save a MATLAB struct with mesh info (to be used in Plotting_Tagus_Estuary.m)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% end of Write mesh data %%%%%%%%%%
@@ -215,7 +230,7 @@ lonlat_lims=d_limits(2,:);
 plot3([lonlat_lims(1) lonlat_lims(1) lonlat_lims(2) lonlat_lims(2) lonlat_lims(1)], ...
     [lonlat_lims(3) lonlat_lims(4) lonlat_lims(4) lonlat_lims(3) lonlat_lims(3)], ...
     ones(1,5).*1e6,'r-','LineWidth',2.5)
-saveas(gcf,['plots/' fname '_mesh_box1.png'])
+saveas(gcf,['plots/' fname_env '_mesh_box1.png'])
 
 figure
 view_cb=1;
@@ -226,7 +241,7 @@ plot3(lo,la,1e6,'ro','MarkerFaceColor','r')
 plot3([lonlat_lims(1) lonlat_lims(1) lonlat_lims(2) lonlat_lims(2) lonlat_lims(1)], ...
     [lonlat_lims(3) lonlat_lims(4) lonlat_lims(4) lonlat_lims(3) lonlat_lims(3)], ...
     ones(1,5).*1e6,'r-','LineWidth',2.5)
-saveas(gcf,['plots/' fname '_mesh_box2.png'])
+saveas(gcf,['plots/' fname_env '_mesh_box2.png'])
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% end of Plotting mesh %%%%%%%%%%%%

@@ -4,7 +4,7 @@ clear all, close all, clc
 
 addpath(genpath('..\..\atWin10_2020_11_4\windows-bin-20201102')); % to call windows model executables
 
-copyfile('io_files_kraken/*env','.','f')
+copyfile('data_kraken/*env','.','f')
 
 %% run kraken
 
@@ -27,6 +27,6 @@ end
 elapsedtime=toc(t0) % measured elapsed time to run kraken in seconds
 
 %% delete or move kraken input/output files
-delete *.env % env files are already archived at './io_files_kraken'
+delete *.env % env files are already archived at './data_kraken'
 delete *.mod
-movefile('azores_*.prt','io_files_kraken\');
+movefile('azores_*.prt','data_kraken\');

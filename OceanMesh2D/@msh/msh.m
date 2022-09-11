@@ -64,13 +64,8 @@ classdef msh
         mapvar % Description of projected space (m_mapv1.4)
         pfix   % fixed points that were constrained in msh
         egfix  % fixed eges that were constraind in msh
-        fname_env
-        coords_km
-        coords_or
-        params_env
-        params_flp
-        TS_data
-        varargin_kraken3d
+        inp_env
+        inp_flp
     end
 
     methods
@@ -197,22 +192,27 @@ classdef msh
                 fname = 'fort_1';
             end                
             
-            for kk=1:length(varargin)
-                if strcmp(varargin{kk},'fname_env')
-                    fname_env = varargin{kk+1};
-                elseif strcmp(varargin{kk},'coords_km')
-                    coords_km = varargin{kk+1};
-                elseif strcmp(varargin{kk},'coords_or')
-                    coords_or = varargin{kk+1};
-                elseif strcmp(varargin{kk},'params_env')
-                    params_env = varargin{kk+1};
-                elseif strcmp(varargin{kk},'params_flp')
-                    params_flp = varargin{kk+1};
-                elseif strcmp(varargin{kk},'TS_data')
-                    TS_data = varargin{kk+1};
-                elseif strcmp(varargin{kk},'varargin_kraken3d')
-                    varargin_kraken3d = varargin{kk+1};
-                end                       
+            for k=1:2:length(varargin)
+                if strcmp(varargin{k},'inp_env')
+                    inp_env = varargin{k+1}
+                elseif strcmp(varargin{k},'inp_flp')
+                    inp_flp = varargin{k+1}
+                end
+%                 if strcmp(varargin{kk},'fname_env')
+%                     fname_env = varargin{kk+1};
+%                 elseif strcmp(varargin{kk},'coords_km')
+%                     coords_km = varargin{kk+1};
+%                 elseif strcmp(varargin{kk},'coords_or')
+%                     coords_or = varargin{kk+1};
+%                 elseif strcmp(varargin{kk},'params_env')
+%                     params_env = varargin{kk+1};
+%                 elseif strcmp(varargin{kk},'params_flp')
+%                     params_flp = varargin{kk+1};
+%                 elseif strcmp(varargin{kk},'TS_data')
+%                     TS_data = varargin{kk+1};
+%                 elseif strcmp(varargin{kk},'varargin_kraken3d')
+%                     varargin_kraken3d = varargin{kk+1};
+%                 end                       
             end
             if nargin < 3
                 if isempty(obj.p)
@@ -272,15 +272,8 @@ classdef msh
                         writeww3( [fname '.ww3'] , obj.t, obj.p, b_t, ...
                             obj.op , obj.title ) ;
                     end
-                    if any(contains(type,'kraken3d')) & exist('fname_env') & exist('coords_or') & exist('params_env') ...
-                            & exist('params_flp') & exist('TS_data')
-                        if exist('varargin_kraken3d')
-                            writekraken3d([fname '.flp'] , obj.t, obj.p, b_t, fname_env, TS_data, params_env, ...
-                                coords_or, params_flp, varargin_kraken3d);
-                        else
-                            writekraken3d([fname '.flp'] , obj.t, obj.p, b_t, fname_env, TS_data, params_env, ...
-                                coords_or, params_flp);
-                        end
+                    if any(contains(type,'kraken3d')) && ~isempty(inp_env) && ~isempty(inp_flp)
+                            writekraken3d(fname, obj.t, obj.p, b_t, inp_env, inp_flp);
                     end
                 end
                 if any(contains(type,'11')) && ~isempty(obj.f11)

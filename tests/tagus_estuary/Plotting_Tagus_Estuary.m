@@ -14,7 +14,7 @@ z = Pos.r.z;
 depths=[1 10 20];
 S=shaperead('CNTR_RG_01M_2020_4326.shp');
 
-mesh=load('grid_info.mat');
+mesh=load('mesh_data.mat');
 z_m=mesh.z;
 lon_m=mesh.lon;
 lat_m=mesh.lat;
