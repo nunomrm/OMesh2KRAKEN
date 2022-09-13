@@ -9,7 +9,7 @@ OMesh2Kraken is under development by Nuno Monteiro (nunom@ua.pt) and Tiago Olive
 ## Dependencies
  * MATLAB (only the R2021b version was tested)
  * OceanMesh2D v4.0
- * Acoustic's Toolbox (2020_11_4 version)
+ * Acoustics Toolbox (2020_11_4 version)
  * m_map package
 
 ## General description of directories
