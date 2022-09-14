@@ -162,7 +162,7 @@ tri=m.t;
 lon=m.p(:,1);lat=m.p(:,2);
 z=m.b;
 
-% Define Lat/Lon coords of origin the new referential in km for KRAKEN
+% Define Lat/Lon coords of the new referential's origin in km for KRAKEN
 [lo,la,idx] = find_nearest_point(lon, lat, coord_source(1), coord_source(2)); % Source coordinates and index in the mesh
 coord_or = [lo la]; % Coords of source (in degrees), which will be the origin of the referential in km coords
 
