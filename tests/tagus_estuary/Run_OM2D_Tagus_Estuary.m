@@ -1,4 +1,9 @@
-% This script runs the Tagus Estuary example for OMesh2kraken
+% This script runs the Tagus Estuary example for OMesh2KRAKEN
+%
+% (c) Nuno Monteiro and Tiago Oliveira, University of Aveiro
+% September 2022
+%
+
 clear all, close all, clc
 
 % Add paths to call OceanMesh2D routines, load data, etc.
