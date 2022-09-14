@@ -1,7 +1,7 @@
 % This script runs Acoustics Toolbox's KRAKEN model for the Azores test case of OMesh2KRAKEN
 %
-% (c) Nuno Monteiro and Tiago Oliveira, University of Aveiro
-% September 2022
+% (c) 2022 Nuno Monteiro and Tiago Oliveira, University of Aveiro
+%
 %
 
 clear all, close all, clc
