@@ -200,7 +200,7 @@ write(m,fnames,'kraken3d','nob',1,'inp_env',inp_env,'inp_flp',inp_flp);
 if ~exist('data_kraken','dir')
     mkdir('data_kraken')
 else
-    delete('data_kraken\*')         % Remove everything from the input/ouput kraken directory
+    delete('data_kraken\*')    % Remove everything from the KRAKEN data directory
 end
 
 movefile('*.env','data_kraken\')    % Move all envs to the input/ouput kraken directory
@@ -209,12 +209,13 @@ if ~exist('plots\','dir')
     mkdir('plots\')                 % Create a directory for plotting if it doesnt exist
 end
 
+% Create a Struct with mesh data (bathymetry, nodes' position, etc.)
 mesh_data.z=z;
 mesh_data.lon=lon;
 mesh_data.lat=lat;
 mesh_data.tri=tri;
 mesh_data.pfix=coord_or;
-save('mesh_data.mat','-struct','mesh_data');    % Save a MATLAB struct with mesh info (to be used in Plotting_Tagus_Estuary.m)
+save('mesh_data.mat','-struct','mesh_data');    % Save the MATLAB struct with mesh info (to be used in Plotting_Tagus_Estuary.m)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% end of Write mesh data %%%%%%%%%%
@@ -224,10 +225,11 @@ save('mesh_data.mat','-struct','mesh_data');    % Save a MATLAB struct with mesh
 %%%%%%%% 5 - Plotting mesh  %%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-view_tri=1;   % Flag to view finite elements' triangles ()
+view_tri=1;   % Flag to view mesh triangles
 view_cb=1;    % Flag to view colorbar
-caxis_lims=[0 50]; % meters
+caxis_lims=[0 50]; % depth limits, in meters (for both plots)
 
+% Plot the entire mesh (Tagus Estuary)
 figure
 lonlat_lims=d_limits(1,:);
 plot_mesh_bathy(tri, z, lon, lat, lonlat_lims, caxis_lims, view_tri, view_cb)
@@ -241,6 +243,7 @@ plot3([lonlat_lims(1) lonlat_lims(1) lonlat_lims(2) lonlat_lims(2) lonlat_lims(1
     ones(1,5).*1e6,'r-','LineWidth',2.5)
 saveas(gcf,['plots/' fname_env '_mesh_box1.png'])
 
+% Plot mesh in boundary box 2 (Tagus Estuary's inlet)
 figure
 view_cb=1;
 lonlat_lims=d_limits(2,:);
