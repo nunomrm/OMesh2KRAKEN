@@ -1,6 +1,6 @@
 function [lo,la,idx] = find_nearest_point(lon, lat, lon_p, lat_p)
 %
-% (c) 2022 Nuno Monteiro
+% (c) 2022 Nuno Monteiro, University of Aveiro
 %
 % Finds the nearest geographical point between a given (Lon,Lat) location and a set of 
 % N points in (lon,lat) coordinates. This function is originally intended for 2D finite 
