@@ -1,6 +1,6 @@
 function plot2D_TL_slice(tl,coord_src,dist,theta,tl_caxis,xy_lims)
 %
-% (c) 2022 Nuno Monteiro
+% (c) 2022 Nuno Monteiro, University of Aveiro
 %
 % Plots 2D surface field of transmission loss (dB) for a given depth
 % 
