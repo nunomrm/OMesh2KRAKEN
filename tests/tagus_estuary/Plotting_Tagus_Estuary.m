@@ -1,7 +1,7 @@
 % This script has the purpose to display the plots of TL results of the Tagus Estuary test case of OMesh2KRAKEN
 %
-% (c) Nuno Monteiro and Tiago Oliveira, University of Aveiro
-% September 2022
+% (c) 2022 Nuno Monteiro and Tiago Oliveira, University of Aveiro
+%
 %
 
 clear all, close all, clc
