@@ -1,14 +1,19 @@
-%% initialize _soupy env files to current directory
+% This script runs KRAKEN and FIELD3D (KRAKEN3D) for the Tagus Estuary test case of OMesh2KRAKEN
+%
+% (c) Nuno Monteiro and Tiago Oliveira, University of Aveiro
+% September 2022
+%
 
 clear all, close all, clc
 
-addpath(genpath('..\..\atWin10_2020_11_4\windows-bin-20201102')); % to call windows model executables
+addpath(genpath('..\..\atWin10_2020_11_4\windows-bin-20201102')); % addpath to call Windows 10 binaries of Acoustics Toolbox
+fname_flp = 'tagus_estuary'; % filename of FLP file
 
 copyfile('data_kraken/*env','.')
 
-%% run kraken and field
+%%%% Run KRAKEN3D %%%%%%%%%%%
 
-t0=tic;
+t0=tic;    % Start counting elapsed time of simulation
 
 runkraken = which( 'kraken.exe' );
 
@@ -26,16 +31,19 @@ end
 
 disp('Running FIELD3D ...')
 runfield3d = which( 'field3d.exe' );
-filename = 'tagus_estuary';
 if ( isempty( runfield3d ) )
    error( 'field3d.exe not found in your Matlab path' )
 else
-   eval( [ '! "' runfield3d '" ' filename ' > field3d.prt' ] )
+   eval( [ '! "' runfield3d '" ' fname_flp ' > field3d.prt' ] )
 end
 
-elapsedtime=toc(t0) % measured elapsed time to run kraken+field3d in seconds
+elapsedtime=toc(t0) % Display measured elapsed time in seconds
 
-%% deletion/moving input/output files of KRAKEN
-delete *.env % env files are already archived at './data_kraken'
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% end of run KRAKEN3D %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Deletion/moving KRAKEN data files
+delete *.env % ENV files are already archived at './data_kraken'
 movefile('*.mod','data_kraken\');
-movefile('tagus_estuary_*.prt','data_kraken\');
+movefile('tagus_estuary*.prt','data_kraken\');
