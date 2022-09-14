@@ -1,6 +1,6 @@
 function [SSP_fin,z_fin,T_fin,S_fin] = interp_ss(TS_data, mesh_data, deltassp)
 %
-% (c) 2022 Nuno Monteiro and Tiago Oliveira
+% (c) 2022 Nuno Monteiro and Tiago Oliveira, University of Aveiro
 %
 % Returns 3D unstructured grid sound speed, temperature and salinity data, given a regular 3D grid data of temperature and salinity.
 % Sound Speed is calculated from MacKenzie (1984) formulation. See sndspd.m for more information.
