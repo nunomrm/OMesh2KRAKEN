@@ -1,12 +1,12 @@
 % This script runs the Tagus Estuary example for OMesh2kraken
 clear all, close all, clc
 
-% addpaths
+% Add paths to call OceanMesh2D routines, load data, etc.
 addpath(genpath('..\..\OceanMesh2D'));
 addpath(genpath('..\..\m_map'));
 addpath(genpath('..\..\data'));
 addpath(genpath('..\..\utils'));
-addpath(genpath('..\..\atWin10_2020_11_4\Matlab\ReadWrite'));  % so that write_env.m function is called during writekraken3d
+addpath(genpath('..\..\atWin10_2020_11_4\Matlab\ReadWrite'));  % to use the write_env.m function
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% 1 - Input options %%%%%%%%%%%%%%%
@@ -21,15 +21,13 @@ max_el_all=[800 400];                                                   % maximu
 max_el_ns_all=[400 250];                                                % maximum element size nearshore            
 R_all=[2 2];                                                            % nr of elements to solve the feature size of coastlines
 grade_all=[0.32 0.27];                                                  % mesh grade
-dems=["EMODNET_DTM_SouthLisbon.nc"; "EMODNET_DTM_SouthLisbon.nc"];      % digital elevation model filenames, defining the input bathymetry
+dems=["EMODNET_DTM_SouthLisbon.nc"; "EMODNET_DTM_SouthLisbon.nc"];      % bathymetry data filenames
 coastlines=["CNTR_RG_01M_2020_4326"; "CNTR_RG_01M_2020_4326"];          % coastline filenames
 alpha_all = [0 25];                                                     % alpha parameter to solve the slope mesh size function
-                                             % filename of output mesh file (FLP) and prefix name of ENV files
 coord_source=[-9.317, 38.665];                                          % sound source coords in lat/lon
 
 %%%%% 1.2 Inputs for KRAKEN %%%%%%%%%%
 
-% definition of parameters
 freq = 1000;                        % frequency (Hz)
 NMedia = 2;                         % number of media
 top_opt = "CVW .";                  % top option
@@ -45,7 +43,7 @@ C_low = 1400;                       % min phase sound speed (m/s)
 C_high = 15000;                     % max phase sound speed (m/s)
 deltassp = 1;                       % increment of the SSP depths
 sndspd_bot = 1700;                  % soundspeed at bottom layer
-fname_env='tagus_estuary'; 
+fname_env='tagus_estuary';          % name of ENV file
 
 %%%%% 1.3 Inputs for FIELD3D %%%%%%%%%%
 
@@ -54,7 +52,7 @@ calc_flp = "STD";                           % type of calculation
 Nm = 999;                                   % number of modes
 Nsx = 1;                                    % number of source coords in x
 Nsy = 1;                                    % number of source coords in y
-coord_or_km = [0 0];                       % coords of the origin (km)
+coord_or_km = [0 0];                        % coords of the origin (km)
 NSz = 1;                                    % number of source depths
 Sz = 10;                                    % source depths (m)
 Rzmin = 0;                                  % min receiver depth (m)
@@ -80,7 +78,7 @@ NGBtheta = length(thetaGB);                 % number of Gaussian beam radials
 GBstep = 1;                                 % step size of Gaussian beams (m)
 GBsteps = 1000;                             % number of Gaussian beam steps
 epsilon_mult = 0.3;                         % epsilon multiplier for Gaussian beam initial conditions
-fname_flp='tagus_estuary'; 
+fname_flp='tagus_estuary';                  % name of FLP file
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% end of Input options %%%%%%%%%%%%
@@ -104,20 +102,22 @@ fname_TSdata = 'cmems_mod_ibi_phy_anfc_0.027deg-3D_P1D-m_1647891936780.nc';
 lon_TS=ncread(fname_TSdata,'longitude');
 lat_TS=ncread(fname_TSdata,'latitude');
 t_TS=ncread(fname_TSdata,'time')./24+datenum(1950,1,1)
-t_TS=t_TS(1); % extract the first instant
+idx_t = 1;                                              % Extracting the first instant (daily mean data for the first day only)
+t_TS=t_TS(idx_t); 
 T=ncread(fname_TSdata,'thetao');
-T=squeeze(T(:,:,:,1));
+T=squeeze(T(:,:,:,idx_t));
 S=ncread(fname_TSdata,'so');
-S=squeeze(S(:,:,:,1));
+S=squeeze(S(:,:,:,idx_t));
 z_TS=ncread(fname_TSdata,'depth');
-% concatenating the previous first depth level values of T and S to the zero level:
+
+% Concatenating the original first depth level values of T and S to the zero level (if first depth is not zero meters)
 if z_TS(1)~=0      
     z_TS=[0; z_TS];
     S=cat(3,S(:,:,1),S); 
     T=cat(3,T(:,:,1),T);
 end
-% Create a struct out of the T-S input data to be read in the
-% writekraken3d.m function:
+
+% Create a struct with the temperature and salinity data, to be read in OM2D's "write" function
 TS_data.S=S;
 TS_data.T=T;
 TS_data.lon=lon_TS;
@@ -157,49 +157,51 @@ tri=m.t;
 lon=m.p(:,1);lat=m.p(:,2);
 z=m.b;
 
-% define Lat/Lon coords of origin the new referential in km for KRAKEN
-[lo,la,idx] = find_nearest_point(lon, lat, coord_source(1), coord_source(2)); % source coordinates and index in the mesh
-coord_or = [lo la]; % coords of source (in degrees), which will be the origin of the referential in km coords
+% Define Lat/Lon coords of origin the new referential in km for KRAKEN
+[lo,la,idx] = find_nearest_point(lon, lat, coord_source(1), coord_source(2)); % Source coordinates and index in the mesh
+coord_or = [lo la]; % Coords of source (in degrees), which will be the origin of the referential in km coords
 
-% other corrections to the bathymetry
-z(isnan(z))=0;  % convert nan nodes into zeros
-z(z<0)=0;       % convert negative numbers (land) into zeros
-m.b=z;          % apply correction to mesh
+% Other corrections to the mesh bathymetry
+z(isnan(z))=0;  % Convert nan nodes into zeros
+z(z<0)=0;       % Convert negative numbers (land) into zeros
+m.b=z;          % Apply correction to mesh
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% end of Run OceanMesh2D %%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% 4 - Write mesh data %%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-flag_env=1;
-flag_flp=1;
+flag_env=1;   % Flag to write/store ENV files (0 - no; 1 - yes)
+flag_flp=1;   % Flag to write/store FLP files (0 - no; 1 - yes)
 
 % Struct array with all ENV inputs
 inp_env.flag = flag_env;
 inp_env.params = params_env;
 inp_env.TS_data = TS_data;
+
 % Struct array with all FLP inputs
 inp_flp.coord_or = coord_or;
 inp_flp.flag = flag_flp;
 inp_flp.params = params_flp;
 fnames = {fname_env fname_flp};
 
+% Write data to ENV and FLP files for KRAKEN3D
 write(m,fnames,'kraken3d','nob',1,'inp_env',inp_env,'inp_flp',inp_flp);
 
+% Create a directory for input/output data of KRAKEN, if it doesnt exist
 if ~exist('data_kraken','dir')
-    mkdir('data_kraken')                        % create a directory for input/output files of kraken if it doesnt exist
+    mkdir('data_kraken')
 else
-    delete('data_kraken\*')                     % remove everything from the input/ouput kraken directory
+    delete('data_kraken\*')         % Remove everything from the input/ouput kraken directory
 end
 
-movefile('*.env','data_kraken\')                % move all envs to the input/ouput kraken directory
+movefile('*.env','data_kraken\')    % Move all envs to the input/ouput kraken directory
 
 if ~exist('plots\','dir')
-    mkdir('plots\')                                 % create a directory for plotting if it doesnt exist
+    mkdir('plots\')                 % Create a directory for plotting if it doesnt exist
 end
 
 mesh_data.z=z;
@@ -207,21 +209,23 @@ mesh_data.lon=lon;
 mesh_data.lat=lat;
 mesh_data.tri=tri;
 mesh_data.pfix=coord_or;
-save('mesh_data.mat','-struct','mesh_data');    % save a MATLAB struct with mesh info (to be used in Plotting_Tagus_Estuary.m)
+save('mesh_data.mat','-struct','mesh_data');    % Save a MATLAB struct with mesh info (to be used in Plotting_Tagus_Estuary.m)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% end of Write mesh data %%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%% 5 - Plotting mesh (bathym.) %%%%%
+%%%%%%%% 5 - Plotting mesh  %%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-figure
+view_tri=1;   % Flag to view finite elements' triangles ()
+view_cb=1;    % Flag to view colorbar
 caxis_lims=[0 50]; % meters
-view_tri=1;view_cb=1;
+
+figure
 lonlat_lims=d_limits(1,:);
-plot_mesh_bathy(tri, z, lon, lat, lonlat_lims, caxis_lims,view_tri,view_cb)
+plot_mesh_bathy(tri, z, lon, lat, lonlat_lims, caxis_lims, view_tri, view_cb)
 plot3(lo,la,1e6,'ro','MarkerFaceColor','r')
 plot3([lonlat_lims(1) lonlat_lims(1) lonlat_lims(2) lonlat_lims(2) lonlat_lims(1)], ...
     [lonlat_lims(3) lonlat_lims(4) lonlat_lims(4) lonlat_lims(3) lonlat_lims(3)], ...
