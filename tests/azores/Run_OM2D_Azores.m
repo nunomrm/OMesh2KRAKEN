@@ -1,4 +1,4 @@
-% This script runs the Azores Archipelago example for OMesh2KRAKEN
+% This script runs OceanMesh2D for the Azores test case of OMesh2KRAKEN
 %
 % (c) Nuno Monteiro and Tiago Oliveira, University of Aveiro
 % September 2022
