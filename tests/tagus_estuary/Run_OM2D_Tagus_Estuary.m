@@ -1,7 +1,7 @@
 % This script runs OceanMesh2D for the Tagus Estuary test case of OMesh2KRAKEN
 %
-% (c) Nuno Monteiro and Tiago Oliveira, University of Aveiro
-% September 2022
+% (c) 2022 Nuno Monteiro and Tiago Oliveira, University of Aveiro
+%
 %
 
 clear all, close all, clc
