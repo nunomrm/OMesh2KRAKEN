@@ -2,7 +2,7 @@ function plot2D_TL_slice(tl,coord_src,dist,theta,tl_caxis,xy_lims)
 %
 % (c) 2022 Nuno Monteiro
 %
-% Plot 2D field of transmission loss for a given depth
+% Plots 2D surface field of transmission loss (dB) for a given depth
 % 
 
 tej = flipud( jet( 256 ) );  % 'jet' colormap reversed
