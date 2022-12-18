@@ -44,10 +44,8 @@ lo_s=[lo_s(ff) xy_lims(2)+0.2 xy_lims(2)+0.2 lo_s(1)];
 la_s=[la_s(ff) xy_lims(4)+0.1 xy_lims(3)-0.1 la_s(1)];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% End of pre-processing %%%%%%%%%
+%%%% Plotting %%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 
 N=length(depths)*length(dist);
 for i=1:length(depths)
@@ -62,7 +60,7 @@ for i=1:length(depths)
         end
     end
     figure
-    plot2D_TL_slice(tl_n,coord_src,dist,theta,tl_caxis,xy_lims)
+    surf2D_TL(tl_n,coord_src,dist,theta,tl_caxis,xy_lims)
     c=colorbar;
     c.Label.String = 'Transmission Loss (dB)';
     c.FontSize=14;
@@ -75,7 +73,4 @@ for i=1:length(depths)
     saveas(gcf,['plots/TLfield_z_' num2str(depths(i)) 'm.png'])
 end
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% end of plotting TL %%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
