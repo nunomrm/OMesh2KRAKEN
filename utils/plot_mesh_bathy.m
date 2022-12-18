@@ -1,7 +1,7 @@
 function plot_mesh_bathy(tri, z, lon, lat,lonlat_lims, caxis_lims, view_tri, view_cb)
 %
 %
-% (c) 2022 Nuno Monteiro, University of Aveiro
+% (c) 2022 Nuno Monteiro and Tiago Oliveira, University of Aveiro
 %
 % Plot unstructured mesh bathymetry field
 %
