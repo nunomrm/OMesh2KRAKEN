@@ -33,11 +33,12 @@ coord_source = [-9.317, 38.665]; % sound source coords in lat/lon
 
 %%%%% 1.2 Inputs for KRAKEN %%%%%%%%%%
 
+% Struct array with input parameters to be written in all ENV files
 params_env.freq = 1000; % frequency (Hz)
 params_env.NMedia = 2; % number of media
 params_env.top_opt = "CVW ."; % top option
 params_env.bot_opt = "V"; % bottom option
-params_env.sigma_int = [0 0]; % RMS roughness at the surface interface
+params_env.sigma_int = [0 0]; % RMS roughness at surface and bottom interfaces
 params_env.N_layers = [10e3 10e3]; % number of mesh points in the water and bottom layers
 params_env.Rdepth = 150; % max depth of receiver (m)
 params_env.sigma_bot = 0; % RMS roughness at the bottom
@@ -51,30 +52,30 @@ params_env.sndspd_bot =  1700; % soundspeed at bottom layer
 %%%%% 1.3 Inputs for FIELD3D %%%%%%%%%%
 
 % Struct array with input parameters to be written in the FLP file
-params_flp.title = "Tagus Estuary"                      % title of run
-params_flp.calc = "STD";                                % type of calculation
-params_flp.Nm = 999;                                    % number of modes 
-coord_or_km = [0 0];                                    % coords of the origin (km)
+params_flp.title = "Tagus Estuary" % title of run
+params_flp.calc = "STD"; % type of calculation
+params_flp.Nm = 999; % number of modes 
+coord_or_km = [0 0]; % coords of the origin (km)
 params_flp.coord_or = coord_or_km;                      
 params_flp.Sxy_lim = [coord_or_km(1) ...
-    coord_or_km(1); coord_or_km(2) coord_or_km(2)];     % 2D range of source(s) (m)
-params_flp.Ns = [1 1];                                  % number of source coords in x and y
-params_flp.Sz_lim = [10 10];                            % source depth range (m)
-params_flp.NSz = 1;                                     % number of source depths
-params_flp.Rz_lim = [0 150];                            % receivers' depth range (m)
-params_flp.NRz = 151;                                   % number of receiver depths
-params_flp.Rr_lim = [0 10];                             % receivers' radial range (km)
-dr = 30;                                                % receiver range increment (km)
-rR=0:dr:10e3;                                           % receiver depths (m)
-NRr = length(rR);                                       % number of receiver depths
-params_flp.NRr = NRr;                                   % number of receiver distances
-params_flp.Rtheta_lim = [-180 180];                     % min receiver radial (deg)
-params_flp.NRtheta = 361;                               % number of receiver radials
-params_flp.GBtheta_lim = [-180 180];                    % angle range of Gaussian beams (deg)
-params_flp.NGBtheta = 361;                              % number of Gaussian beam angles
-params_flp.GBstep = 30;                                 % radial step size of Gaussian beams (m)
-params_flp.GBsteps = 334;                               % number of Gaussian beam radial steps
-params_flp.epsilon_mult = 0.3;                          % epsilon multiplier for Gaussian beam initial conditions
+    coord_or_km(1); coord_or_km(2) coord_or_km(2)]; % 2D range of source(s) (m)
+params_flp.Ns = [1 1]; % number of source coords in x and y
+params_flp.Sz_lim = [10 10]; % source depth range (m)
+params_flp.NSz = 1; % number of source depths
+params_flp.Rz_lim = [0 150]; % receivers' depth range (m)
+params_flp.NRz = 151; % number of receiver depths
+params_flp.Rr_lim = [0 10]; % receivers' radial range (km)
+dr = 30; % receiver range increment (km)
+rR=0:dr:10e3; % receiver depths (m)
+NRr = length(rR); % number of receiver depths
+params_flp.NRr = NRr; % number of receiver distances
+params_flp.Rtheta_lim = [-180 180]; % min receiver radial (deg)
+params_flp.NRtheta = 361; % number of receiver radials
+params_flp.GBtheta_lim = [-180 180]; % angle range of Gaussian beams (deg)
+params_flp.NGBtheta = 361; % number of Gaussian beam angles
+params_flp.GBstep = 30; % radial step size of Gaussian beams (m)
+params_flp.GBsteps = 334; % number of Gaussian beam radial steps
+params_flp.epsilon_mult = 0.3; % epsilon multiplier for Gaussian beam initial conditions
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% 2 - Input processing %%%%%%%%%%%%
@@ -85,7 +86,7 @@ fname_TSdata = 'cmems_mod_ibi_phy_anfc_0.027deg-3D_P1D-m_1647891936780.nc';
 lon_TS=ncread(fname_TSdata,'longitude');
 lat_TS=ncread(fname_TSdata,'latitude');
 t_TS=ncread(fname_TSdata,'time')./24+datenum(1950,1,1)
-idx_t = 1;                                              % Extracting the first instant (daily mean data for the first day only)
+idx_t = 1; % Extracting the first instant (daily mean data for the first day only)
 t_TS=t_TS(idx_t); 
 T=ncread(fname_TSdata,'thetao');
 T=squeeze(T(:,:,:,idx_t));
