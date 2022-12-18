@@ -31,10 +31,6 @@ end
 
 elapsedtime=toc(t0) % measured elapsed time to run kraken in seconds
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% end of run KRAKEN %%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 % Deletion/moving KRAKEN data files
 delete *.env % ENV files are already archived at './data_kraken'
 delete *.mod
