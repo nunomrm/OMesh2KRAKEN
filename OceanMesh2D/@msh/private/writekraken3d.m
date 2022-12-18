@@ -1,12 +1,14 @@
 function outname = writekraken3d(tri,VX,B,inp_env,inp_flp)
 %
-% (c) 2022 Nuno Monteiro, University of Aveiro
+% (c) 2022 Nuno Monteiro and Tiago Oliveira, University of Aveiro
+% (Function for OMesh2KRAKEN - https://github.com/nunomrm/OMesh2KRAKEN/)
 %
 % Writes required input ENV and FLP files for KRAKEN and 
 % FIELD3D, from an OceanMesh2D unstructured mesh and given
 % temperature and salinity data for sound speed calculation
 % (the latter not required, and a constant value of sound
-% speed can be attributed to all ENV files)
+% speed can be attributed to all ENV files).
+%
 %
 %%% INPUTS
 % tri - triangular mesh elements from the mesh, with N_e 
@@ -50,14 +52,14 @@ if flag_env == 1
     
     % Conditions for sound speed calculation or not (depending on presence of temperature/salinity input data)
     if isfield(inp_env,'TS_data')==1 % activation of sound speed calculation
+        % Extraction of mesh and temperature/salinity data
         TS_data = inp_env.TS_data;
-        % Calculation of SSP in the unstructured mesh from T-S data
         mesh.lon = lon;
         mesh.lat = lat;
         mesh.z = B;
         mesh.tri = tri;
+        % Calculation of SSP in the unstructured mesh from T-S data
         [SSP_fin, T, S] = calc_ss(TS_data, mesh, z_fin);
-        
     else    % in case a sound speed constant value for all points (inp_env.SS_constant) or nothing is given
         if isfield(inp_env,'SS_constant')==1
             SSP_fin = ones(nnode,length(z_fin)).*inp_env.SS_constant;
@@ -135,7 +137,7 @@ if flag_flp==1
 
     disp('Writing the FLP file')
     
-    % load data from inp_flp struct
+    % Load data from inp_flp struct
     fname_flp = inp_flp.fname;
     params_flp = inp_flp.params;
     coord_or = inp_flp.coord_or;
@@ -143,7 +145,7 @@ if flag_flp==1
     coord_km=zeros(nnode,2);
     coord_or_km = params_flp.coord_or;
     
-    % conversion of mesh node coordinates from lon/lat (degrees) to km
+    % Conversion of mesh node coordinates from lon/lat (degrees) to km
     for i = 1:length(lon)
         [arclen,az] = distance(coord_or(1,2),coord_or(1,1),lat(i),lon(i),wgs84Ellipsoid); % arclen in m, az in deg
         arclen = arclen/1e3; % convert to km
@@ -154,7 +156,7 @@ if flag_flp==1
         coord_km(i,:) = [arclen*cosd(theta) arclen*sind(theta)]-coord_or_km;
     end
     
-    % write to FLP file
+    % Write to FLP file
     fid = fopen([fname_flp '.flp'],'w');
     outname = sprintf("'%s'",fname_flp);
     fprintf(fid,"'%s'    ! TITLE\n" + ...
