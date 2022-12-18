@@ -64,13 +64,13 @@ params_flp.Sz_lim = [10 10]; % source depth range (m)
 params_flp.NSz = 1; % number of source depths
 params_flp.Rz_lim = [0 150]; % receivers' depth range (m)
 params_flp.NRz = 151; % number of receiver depths
-params_flp.Rr_lim = [0 10]; % receivers' radial range (km)
-dr = 30; % receiver range increment (km)
-rR=0:dr:10e3; % receiver depths (m)
-NRr = length(rR); % number of receiver depths
-params_flp.NRr = NRr; % number of receiver distances
-params_flp.Rtheta_lim = [-180 180]; % min receiver radial (deg)
-params_flp.NRtheta = 361; % number of receiver radials
+params_flp.Rr_lim = [0 10]; % receivers' radial distance range (km)
+dr = 30; % receiver range increment (m)
+rR=0:dr:10e3;
+NRr = length(rR);
+params_flp.NRr = NRr; % number of receiver radial distances
+params_flp.Rtheta_lim = [-180 180]; % min receiver angle (deg)
+params_flp.NRtheta = 361; % number of receiver angles
 params_flp.GBtheta_lim = [-180 180]; % angle range of Gaussian beams (deg)
 params_flp.NGBtheta = 361; % number of Gaussian beam angles
 params_flp.GBstep = 30; % radial step size of Gaussian beams (m)
@@ -159,8 +159,8 @@ flag_env = 1;   % Flag to write/store ENV files (0 - no; 1 - yes)
 flag_flp = 1;   % Flag to write/store FLP files (0 - no; 1 - yes)
 
 fname = 'tagus_estuary';
-inp_env.fname = fname;        % prefix of ENV filenames
-inp_flp.fname = fname;        % FLP filename
+inp_env.fname = fname; % prefix of ENV filenames
+inp_flp.fname = fname; % FLP filename
 
 % Struct array with ENV inputs (as struct fields)
 inp_env.flag = flag_env;        % flag for ENV file creation
@@ -193,13 +193,12 @@ if ~exist('plots\','dir')
 end
 
 % Create a Struct with mesh data (bathymetry, nodes' position, etc.)
-mesh_data.z=z;
-mesh_data.lon=lon;
-mesh_data.lat=lat;
-mesh_data.tri=tri;
-mesh_data.pfix=coord_or;
+mesh_data.z = z;
+mesh_data.lon = lon;
+mesh_data.lat = lat;
+mesh_data.tri = tri;
+mesh_data.pfix = coord_or;
 save('mesh_data.mat','-struct','mesh_data');    % Save the MATLAB struct with mesh info (to be used in Plotting_Tagus_Estuary.m)
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% 5 - Plotting mesh  %%%%%%%%%%%%%%
