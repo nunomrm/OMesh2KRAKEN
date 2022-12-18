@@ -55,39 +55,6 @@ params_env.sndspd_bot =  1700; % soundspeed at bottom layer
 %%%%% 1.3 Inputs for FIELD3D %%%%%%%%%%
 
 % Struct array with input parameters to be written in the FLP file
-title_flp = "Azores archipelago"            % title of run 
-calc_flp = "STD";                           % type of calculation
-Nm = 999;                                   % number of modes
-Nsx = 1;                                    % number of source coords in x
-Nsy = 1;                                    % number of source coords in y
-coord_or_km = [0 0];                       % coords of the origin (km)
-NSz = 1;                                    % number of source depths   
-Sz = 10;                                    % source depths (m)
-Rzmin = 0;                                  % min receiver depth (m)
-Rzmax = Rdepth;                             % max receiver depth (m)
-dz = deltassp;                              % receiver depth discretization
-zR=Rzmin:dz:Rzmax;                          % receiver depths
-NRz = length(zR);                           % number of receiver depths
-Rrmin = 0;                                  % min receiver range (km)
-Rrmax = 350;                                % max receiver range (km)
-dr = 1;                                     % receiver range discretization (km)
-rR=Rrmin:dr:Rrmax;                          % receiver depths (km)
-NRr = length(rR);                           % number of receiver depths
-Rthetamin = -180;                           % min receiver radial (deg)
-Rthetamax = 180;                            % max receiver radial (deg)
-dtheta = 1;                                 % receiver radial discretization (deg)
-thetaR=Rthetamin:dtheta:Rthetamax;          % receiver radials (deg)
-NRtheta = length(thetaR);                   % number of receiver radials
-GBthetamin = -180;                          % min Gaussian beam radial (deg)
-GBthetamax = 180;                           % max Gaussian beam radial (deg)
-dthetaGB = 1;                               % Gaussian beam radial discretization (deg)
-thetaGB=GBthetamin:dthetaGB:GBthetamax;     % Gaussian beam radials (deg)
-NGBtheta = length(thetaGB);                 % number of Gaussian beam radials
-GBstep = 1;                                 % step size of Gaussian beams (m)
-GBsteps = 1000;                             % number of Gaussian beam steps
-epsilon_mult = 0.3;                         % epsilon multiplier for Gaussian beam initial conditions
-fname_flp='tagus_estuary'; 
-
 params_flp.title = "Azores archipelago" % title of run
 params_flp.calc = "STD"; % type of calculation
 params_flp.Nm = 999; % number of modes 
