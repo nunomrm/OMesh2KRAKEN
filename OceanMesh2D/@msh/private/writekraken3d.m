@@ -10,7 +10,7 @@ function outname = writekraken3d(tri,VX,B,inp_env,inp_flp)
 % speed can be attributed to all ENV files).
 %
 %
-%%% INPUTS
+%%% INPUTS:
 % tri - triangular mesh elements from the mesh, with N_e 
 % elements: (N_e,3)
 % VX - mesh vertices (or nodes) coordinates (nnode,2)
