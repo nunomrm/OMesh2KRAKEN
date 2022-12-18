@@ -1,4 +1,4 @@
-function outname = writekraken3d(tri,VX,B,inp_env,inp_flp)
+function outname = writekraken3d(tri, VX, B, inp_env, inp_flp)
 %
 % (c) 2022 Nuno Monteiro and Tiago Oliveira, University of Aveiro
 % (Function for OMesh2KRAKEN - https://github.com/nunomrm/OMesh2KRAKEN/)
