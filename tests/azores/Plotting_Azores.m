@@ -53,11 +53,14 @@ for i=1:N
     fclose(fid);
 end
 
+figure
 trisurf(tri,lon_m,lat_m,Cg(:,1))
 shading interp, view(2)
 colormap(turbo(20))
-caxis([1500 1530])
+caxis([1485 1530])
 hold on
+colorbar
+title('Group velocity (m/s) of the first mode')
 fill3(lo_s,la_s,ones(1,length(lo_s)).*1e6,'k')
 xlim([xy_lims(1) xy_lims(2)])
 ylim([xy_lims(3) xy_lims(4)])
