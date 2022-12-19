@@ -66,7 +66,7 @@ params_flp.Ns = [1 1]; % number of source coords in x and y
 params_flp.Sz_lim = [10 10]; % source depth range (m)
 params_flp.NSz = 1; % number of source depths
 dz = 10;                           
-zR = Rzmin:dz:Rzmax;
+zR = 0:dz:6e3;
 NRz = length(zR);
 params_flp.Rz_lim = [zR(1) zR(end)]; % receivers' depth range (m)
 params_flp.NRz = 151; % number of receiver depths
@@ -101,6 +101,7 @@ S=squeeze(S(:,:,:,idx_t));
 z_TS=ncread(fname_TSdata,'depth');
 
 % Concatenating the previous first depth level values of T and S to the zero level:
+month = 1; %selected month
 if z_TS(1)~=0
     z_TS=[0; z_TS];
     S=cat(3,S(:,:,month),S); 
@@ -232,7 +233,7 @@ lonlat_lims=d_limits(4,:);
 plot3([lonlat_lims(1) lonlat_lims(1) lonlat_lims(2) lonlat_lims(2) lonlat_lims(1)], ...
     [lonlat_lims(3) lonlat_lims(4) lonlat_lims(4) lonlat_lims(3) lonlat_lims(3)], ...
     ones(1,5).*1e6,'r-','LineWidth',2.5)
-saveas(gcf,['plots/' fname_env '_mesh_box1.png'])
+saveas(gcf,['plots/' fname '_mesh_box1.png'])
 
 % Plot mesh in boundary box 2 (Western Group of Azores)
 figure
@@ -244,7 +245,7 @@ plot_mesh_bathy(tri, z, lon, lat, lonlat_lims, caxis_lims, view_tri, view_cb)
 plot3([lonlat_lims(1) lonlat_lims(1) lonlat_lims(2) lonlat_lims(2) lonlat_lims(1)], ...
     [lonlat_lims(3) lonlat_lims(4) lonlat_lims(4) lonlat_lims(3) lonlat_lims(3)], ...
     ones(1,5).*1e6,'r-','LineWidth',2.5)
-saveas(gcf,['plots/' fname_env '_mesh_box2.png'])
+saveas(gcf,['plots/' fname '_mesh_box2.png'])
 
 % Plot mesh in boundary box 3 (Central Group of Azores)
 figure
@@ -256,7 +257,7 @@ plot_mesh_bathy(tri, z, lon, lat, lonlat_lims, caxis_lims, view_tri, view_cb)
 plot3([lonlat_lims(1) lonlat_lims(1) lonlat_lims(2) lonlat_lims(2) lonlat_lims(1)], ...
     [lonlat_lims(3) lonlat_lims(4) lonlat_lims(4) lonlat_lims(3) lonlat_lims(3)], ...
     ones(1,5).*1e6,'r-','LineWidth',2.5)
-saveas(gcf,['plots/' fname_env '_mesh_box3.png'])
+saveas(gcf,['plots/' fname '_mesh_box3.png'])
 
 % Plot mesh in boundary box 4 (Eastern Group of Azores)
 figure
@@ -268,4 +269,4 @@ plot_mesh_bathy(tri, z, lon, lat, lonlat_lims, caxis_lims, view_tri, view_cb)
 plot3([lonlat_lims(1) lonlat_lims(1) lonlat_lims(2) lonlat_lims(2) lonlat_lims(1)], ...
     [lonlat_lims(3) lonlat_lims(4) lonlat_lims(4) lonlat_lims(3) lonlat_lims(3)], ...
     ones(1,5).*1e6,'r-','LineWidth',2.5)
-saveas(gcf,['plots/' fname_env '_mesh_box4.png'])
+saveas(gcf,['plots/' fname '_mesh_box4.png'])
