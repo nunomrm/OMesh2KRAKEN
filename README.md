@@ -2,6 +2,8 @@
 
 OMesh2KRAKEN: A tool for mesh generation with OceanMesh2D for underwater acoustic modeling with KRAKEN
 
+**Current version:**
+
 version 1.1 (December 19, 2022): significant changes made in ```OceanMesh2D/@msh/private/writekraken3d.m```, in ```tests/tagus_estuary/Run_OM2D_*.m```, and in ```tests/azores/Run_OM2D_*.m```; minor changes made in ```utils/calc_ss.m``` and ```OceanMesh2D/@msh/msh.m```.
 
 **Archived (deprecated) versions:**
