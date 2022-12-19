@@ -21,9 +21,9 @@ version 1.1 (December 19, 2022): significant changes made in ```OceanMesh2D/@msh
  * atWin10_2020_11_4: Contains the Acoustics Toolbox (Windows version at [1]). The original ```tests/``` folder from the Acoustics Toolbox was removed to save space;
  * data: Contains environmental data (temperature and salinity), bathymetry and shoreline datasets to run the two tests;
  * m_map: A mapping package for Matlab (dependency for OceanMesh2D) [2];
- * OceanMesh2D: OceanMesh2D toolbox [3] adapted to OMesh2Kraken. Specific adaptations were made to OceanMesh2D: the ```msh.m``` script in ```OceanMesh2d/@msh/``` was changed, and two function scripts (```writekraken3d.m```, ```interp_ss.m```) were created in ```OceanMesh2D/@msh/private```. Some unnecessary folders from the original version were removed to save space;
+ * OceanMesh2D: OceanMesh2D toolbox [3] adapted to OMesh2Kraken. Specific adaptations were made to OceanMesh2D: the ```msh.m``` script in ```OceanMesh2d/@msh/``` was changed, and two function scripts (```writekraken3d.m```, ```calc_ss.m```) were created in ```OceanMesh2D/@msh/private```. Some unnecessary folders from the original version were removed to save space;
  * tests: Tagus Estuary and Azores study cases shown in Sections 3.1 and 3.2 of the paper, respectivelly, to test OMesh2KRAKEN;
- * utils: Contains functions for pre/post-processing purposes (e.g., to calculate the sound speed, make bathymetry field plots), where functions ```brewermap.m``` and ```sndspd.m``` come from [4] and [5], respectively, while remaining (```find_nearest_point.m```, ```plot_mesh_bathy.m```, ```interp_ss.m``` and ```plot2D_TL_slice.m```) are custom made for OMesh2Kraken.
+ * utils: Contains functions for pre/post-processing purposes (e.g., to calculate the sound speed, make bathymetry field plots), where functions ```brewermap.m``` and ```sndspd.m``` come from [4] and [5], respectively, while remaining (```find_nearest_point.m```, ```plot_mesh_bathy.m```, ```calc_ss.m``` and ```surf2D_TL.m```) are custom made for OMesh2Kraken.
 
 ## How to use OMesh2KRAKEN
 Here we present hands-on instructions to reproduce the Tagus estuary study case results:
