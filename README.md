@@ -4,7 +4,10 @@ OMesh2KRAKEN: A tool for mesh generation with OceanMesh2D for underwater acousti
 
 OMesh2KRAKEN is under development by Nuno Monteiro (nunom@ua.pt) and Tiago Oliveira (toliveira@ua.pt). OMesh2KRAKEN is distributed under the GNU Public License
 
-Scientific article about OMesh2KRAKEN (https://doi.org/10.1016/j.advengsoft.2023.103455)
+Paper about OMesh2KRAKEN: https://doi.org/10.1016/j.advengsoft.2023.103455.
+
+**How to cite this product [APA format]:**
+Monteiro, N. M. R., & Oliveira, T. C. A. (2023). Mesh generation for underwater acoustic modeling with KRAKEN. Advances in Engineering Software, 180, 103455. https://doi.org/10.1016/j.advengsoft.2023.103455
 
 **Current version:**
 
