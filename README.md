@@ -13,7 +13,7 @@ version 1.0 (September 11, 2022)
 Monteiro, N.M.R., & Oliveira, T.C.A. (2023). Mesh generation for underwater acoustic modeling with KRAKEN. Advances in Engineering Software, 180, 103455. https://doi.org/10.1016/j.advengsoft.2023.103455
 
 ## Dependencies
- * MATLAB (only the R2021b version was tested)
+ * MATLAB (R2021a or above)
  * OceanMesh2D v4.0
  * Acoustics Toolbox (2020_11_4 version)
  * m_map package
