@@ -1,17 +1,14 @@
 # OMesh2KRAKEN
 
-OMesh2KRAKEN: A tool for mesh generation with OceanMesh2D for underwater acoustic modeling with KRAKEN
-
+OMesh2KRAKEN: A tool for mesh generation with OceanMesh2D for underwater acoustic modeling with KRAKEN <br />
 OMesh2KRAKEN is under development by Nuno Monteiro (nunom@ua.pt) and Tiago Oliveira (toliveira@ua.pt). OMesh2KRAKEN is distributed under the GNU Public License
 
 Paper about OMesh2KRAKEN: https://doi.org/10.1016/j.advengsoft.2023.103455.
 
-**How to cite this product [APA format]:**
+**How to cite this product [APA format]:** <br />
+Monteiro, N.M.R., & Oliveira, T.C.A. (2023). Mesh generation for underwater acoustic modeling with KRAKEN. Advances in Engineering Software, 180, 103455. https://doi.org/10.1016/j.advengsoft.2023.103455
 
-Monteiro, N. M. R., & Oliveira, T. C. A. (2023). Mesh generation for underwater acoustic modeling with KRAKEN. Advances in Engineering Software, 180, 103455. https://doi.org/10.1016/j.advengsoft.2023.103455
-
-**Current version:**
-
+**Current version:** <br />
 version 1.1 (December 19, 2022): significant changes made in ```OceanMesh2D/@msh/private/writekraken3d.m```, in ```tests/tagus_estuary/Run_OM2D_*.m```, and in ```tests/azores/Run_OM2D_*.m```; minor changes made in ```utils/calc_ss.m``` and ```OceanMesh2D/@msh/msh.m```.
 
 **Archived (deprecated) versions:**
@@ -49,12 +46,8 @@ This worflow is similar for the Azores study case (```tests/azores/```), except 
 
 ## References
 
-[1] The Acoustics Toolbox. Last accessed July 8, 2022: http://oalib.hlsresearch.com/AcousticsToolbox/.
-
-[2] Pawlowicz, R., 2020. "M_Map: A mapping package for MATLAB", version 1.4m, [Computer software], available online at www.eoas.ubc.ca/~rich/map.html.
-
-[3] Roberts, K. J., Pringle, W. J., and Westerink, J. J., 2019. OceanMesh2D 1.0: MATLAB-based software for two-dimensional unstructured mesh generation in coastal ocean modeling, Geoscientific Model Development, 12, 1847-1868. https://doi.org/10.5194/gmd-12-1847-2019.
-
-[4] Stephen23 (2022). ColorBrewer: Attractive and Distinctive Colormaps (https://github.com/DrosteEffect/BrewerMap/releases/tag/3.2.3), GitHub. Retrieved July 8, 2022.
-
+[1] The Acoustics Toolbox. Last accessed July 8, 2022: http://oalib.hlsresearch.com/AcousticsToolbox/. <br />
+[2] Pawlowicz, R., 2020. "M_Map: A mapping package for MATLAB", version 1.4m, [Computer software], available online at www.eoas.ubc.ca/~rich/map.html. <br />
+[3] Roberts, K. J., Pringle, W. J., and Westerink, J. J., 2019. OceanMesh2D 1.0: MATLAB-based software for two-dimensional unstructured mesh generation in coastal ocean modeling, Geoscientific Model Development, 12, 1847-1868. https://doi.org/10.5194/gmd-12-1847-2019. <br />
+[4] Stephen23 (2022). ColorBrewer: Attractive and Distinctive Colormaps (https://github.com/DrosteEffect/BrewerMap/releases/tag/3.2.3), GitHub. Retrieved July 8, 2022. <br />
 [5] Sergei Koptenko (2022). Sound Speed in Sea Water (https://www.mathworks.com/matlabcentral/fileexchange/4940-sound-speed-in-sea-water), MATLAB Central File Exchange. Retrieved July 8, 2022.
